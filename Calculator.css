@@ -1,0 +1,58 @@
+.calculator {
+    border: 2px solid black;
+    border-radius: 15px;
+    height: 600px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 40px;
+    font-family:'Arial'
+} 
+.display {
+    height: 150px;
+    width: 350px;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+.line {
+    width: 360px;
+    height: 2px;
+    background-color:rgb(238, 238, 238);
+}
+
+.keyboard {
+    height: 350px;
+    width: 400px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: 50px;
+    align-items: center;
+}
+
+.keyboard div {
+    display: flex;
+}
+
+button {
+    border-radius: 10px;
+    background-color: rgb(238, 238, 238);
+    height: 45px;
+    width: 80px;
+    font-size: 40px;
+    margin: 10px;
+}
+
+button:hover {
+    background-color: rgba(206, 206, 206, 0.861);
+    transition: 0,7s;
+}
+
+.keyplus, .keyless, .keymultiplier, .keydivider, .keydelete {
+    color: rgb(242, 119, 53);
+}
+
+.keysame { background-color: rgb(242, 119, 53);
+    color: white;
+}
+
