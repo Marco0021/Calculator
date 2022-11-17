@@ -1,4 +1,5 @@
 .calculator {
+    background-color: rgb(184, 184, 184);
     border: 2px solid black;
     border-radius: 15px;
     height: 600px;
@@ -9,16 +10,22 @@
     font-size: 40px;
     font-family:'Arial'
 } 
-.display {
+#display {
+    /* background-color: rgb(186, 222, 222); */
     height: 150px;
     width: 350px;
     margin-top: 20px;
     border-radius: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    font-size: 70px;
 }
 .line {
     width: 360px;
     height: 2px;
     background-color:rgb(238, 238, 238);
+
 }
 
 .keyboard {
@@ -28,7 +35,7 @@
     grid-template-columns: repeat(4, 1fr);
     margin-top: 50px;
     align-items: center;
-}
+} 
 
 .keyboard div {
     display: flex;
@@ -55,4 +62,3 @@ button:hover {
 .keysame { background-color: rgb(242, 119, 53);
     color: white;
 }
-
