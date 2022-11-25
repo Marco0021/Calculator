@@ -11,7 +11,7 @@
     font-family:'Arial'
 } 
 #display {
-    /* background-color: rgb(186, 222, 222); */
+    background-color: rgb(186, 222, 222);
     height: 150px;
     width: 350px;
     margin-top: 20px;
@@ -20,6 +20,7 @@
     justify-content: flex-end;
     align-items: flex-end;
     font-size: 70px;
+    overflow:hidden;
 }
 .line {
     width: 360px;
@@ -55,10 +56,11 @@ button:hover {
     transition: 0,7s;
 }
 
-.keyplus, .keyless, .keymultiplier, .keydivider, .keydelete {
+#keyplus, #keyless, #keymultiplier, #keydivider, #keydelete {
     color: rgb(242, 119, 53);
 }
 
-.keysame { background-color: rgb(242, 119, 53);
+#keysame {
+    background-color: rgb(242, 119, 53);
     color: white;
 }
