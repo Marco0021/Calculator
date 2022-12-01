@@ -1,7 +1,8 @@
 let display = document.querySelector("#display");
 let numbers = document.querySelectorAll(".btn");
 let operators = document.querySelectorAll(".operator");
-let clear = document.querySelector("#keydelete");
+let clearLastDisplay = document.querySelector("#keydelete");
+let clearAllDisplay = document.querySelector("#cancel");
 let equals = document.querySelector("#equals");
 
 let displayValue = 0;
@@ -31,7 +32,7 @@ function calculator() {
     operatorBtn.addEventListener("click", (e) => {
       if (e.target.innerText !== "=") {
         operator = e.target.innerText;
-        displayValue = operand1 + operator;
+        displayValue = operand1 + operator + operand2;
         display.textContent = displayValue;
         console.log(`dv :${displayValue}`);
       }
@@ -81,5 +82,27 @@ function calculator() {
     result = +operand1 * +operand2;
     return result;
   }
+
+  clearLastDisplay.addEventListener("click", () => {
+    let display = document.querySelector("#display");
+    let clearLast = display.textContent.toString().slice(0, -1);
+    display.textContent = clearLast;
+    operand1 = clearLast;
+    operand2 = "";
+    operator = "";
+    displayValue = display.textContent;
+    console.log(operand1, operand2);
+    console.log(clearLast);
+    console.log(displayValue);
+  });
+
+  clearAllDisplay.addEventListener("click", () => {
+    operand1 = "";
+    operator = "";
+    operand2 = "";
+    display.textContent = 0;
+    displayValue = display.textContent;
+    console.log(displayValue);
+  });
 }
 calculator();

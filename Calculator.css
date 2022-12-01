@@ -11,11 +11,11 @@
     font-family:'Arial'
 } 
 #display {
-    background-color: rgb(186, 222, 222);
+    background-color: hwb(0 100% 0%);
     height: 150px;
     width: 350px;
     margin-top: 20px;
-    border-radius: 10px;
+    border-radius: 5px;
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
@@ -34,7 +34,7 @@
     width: 400px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    margin-top: 50px;
+    margin-top: 30px;
     align-items: center;
 } 
 
@@ -43,24 +43,27 @@
 }
 
 button {
-    border-radius: 10px;
+    border-radius: 6px;
     background-color: rgb(238, 238, 238);
-    height: 45px;
-    width: 80px;
     font-size: 40px;
-    margin: 10px;
+    margin: 4px;
 }
-
-button:hover {
-    background-color: rgba(206, 206, 206, 0.861);
-    transition: 0,7s;
-}
-
-#keyplus, #keyless, #keymultiplier, #keydivider, #keydelete {
-    color: rgb(242, 119, 53);
-}
-
-#equals {
+#equals{
+    grid-column: 3/5;
     background-color: rgb(242, 119, 53);
     color: white;
 }
+#keyplus, #keyless, #keymultiplier, #keydivider, #percentage {
+    color: rgb(242, 119, 53);
+}
+
+#cancel, #keydelete {
+    background-color: rgb(242, 119, 53);
+    color: white;
+    
+}
+
+ button:hover {
+    background-color: rgba(177, 143, 143, 0.816) !important;
+    transition: 0.2s;
+} 
