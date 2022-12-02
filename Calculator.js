@@ -5,104 +5,109 @@ let clearLastDisplay = document.querySelector("#keydelete");
 let clearAllDisplay = document.querySelector("#cancel");
 let equals = document.querySelector("#equals");
 
-let displayValue = 0;
-let operand1 = "";
-let operand2 = "";
-let operator = "";
+const calculator = () => {
+  let operand1 = "";
+  let operand2 = "";
+  let operator = "";
+  let lastResult;
+  let newResult;
 
-function calculator() {
-  numbers.forEach((number) => {
-    number.addEventListener("click", (e) => {
-      if (operator == "") {
-        operand1 += e.target.innerText;
-        display.textContent = operand1;
-        displayValue = display.textContent;
-        console.log(`op1: ${operand1}`);
-      } else {
-        operand2 += e.target.innerText;
-        display.textContent = operand1 + operator + operand2;
-        displayValue = operand1 + operator + operand2;
-        console.log(`op2: ${operand2}`);
-      }
-      console.log(`dv 2:${displayValue}`);
-    });
-  });
+  const add = (operand1, operand2) => {
+    result = +operand1 + +operand2;
+    return result;
+  };
+  const subtract = (operand1, operand2) => {
+    result = operand1 - operand2;
+    return result;
+  };
+  const divider = (operand1, operand2) => {
+    result = +operand1 / +operand2;
+    return result;
+  };
+  const multiply = (operand1, operand2) => {
+    result = +operand1 * +operand2;
+    return result;
+  };
+  const percentage = (operand1) => {
+    return operand1 / 100;
+  };
 
-  operators.forEach((operatorBtn) => {
-    operatorBtn.addEventListener("click", (e) => {
-      if (e.target.innerText !== "=") {
-        operator = e.target.innerText;
-        displayValue = operand1 + operator + operand2;
-        display.textContent = displayValue;
-        console.log(`dv :${displayValue}`);
-      }
-    });
-  });
+  const calcResult = () => {
+    switch (operator) {
+      case "+":
+        lastResult = add(operand1, operand2);
+        break;
+      case "-":
+        lastResult = subtract(operand1, operand2);
+        break;
+      case "*":
+        lastResult = multiply(operand1, operand2);
+        break;
+      case "/":
+        lastResult = divider(operand1, operand2);
+        break;
+      case "%":
+        lastResult = percentage(operand1);
+    }
+    display.textContent = lastResult;
+  };
 
   equals.addEventListener("click", calcResult);
 
-  function calcResult() {
-    switch (operator) {
-      case "+":
-        display.textContent = add(operand1, operand2);
-        displayValue = display.textContent;
-        console.log(displayValue);
-        break;
-      case "-":
-        display.textContent = subtract(operand1, operand2);
-        displayValue = display.textContent;
-        console.log(displayValue);
-        break;
-      case "*":
-        display.textContent = multiply(operand1, operand2);
-        displayValue = display.textContent;
-        console.log(displayValue);
-        break;
-      case "/":
-        display.textContent = divider(operand1, operand2);
-        displayValue = display.textContent;
-        console.log(displayValue);
-        break;
+  const getOperand = (e) => {
+    if (operator == "") {
+      operand1 += e.target.innerText;
+      display.textContent = operand1;
+      console.log(`op1: ${operand1}`);
+    } else {
+      operand2 += e.target.innerText;
+      display.textContent = operand1 + operator + operand2;
+      console.log(`op2: ${operand2}`);
     }
-  }
+  };
 
-  function add(operand1, operand2) {
-    result = +operand1 + +operand2;
-    return result;
-  }
-  function subtract(operand1, operand2) {
-    result = operand1 - operand2;
-    return result;
-  }
-  function divider(operand1, operand2) {
-    result = +operand1 / +operand2;
-    return result;
-  }
-  function multiply(operand1, operand2) {
-    result = +operand1 * +operand2;
-    return result;
-  }
+  const choiceNumber = () => {
+    numbers.forEach((number) => {
+      number.addEventListener("click", (e) => getOperand(e));
+    });
+  };
 
-  clearLastDisplay.addEventListener("click", () => {
+  choiceNumber();
+
+  const getOperator = (e) => {
+    calcResult();
+    operator = e.target.innerText;
+    if (lastResult !== undefined) {
+      operand1 = lastResult;
+      operand2 = "";
+    }
+    display.textContent = operand1 + operator;
+  };
+
+  operators.forEach((operatorBtn) => {
+    if (operatorBtn.innerText !== "=") {
+      operatorBtn.addEventListener("click", (e) => getOperator(e));
+    }
+  });
+
+  const clearLast = () => {
     let display = document.querySelector("#display");
     let clearLast = display.textContent.toString().slice(0, -1);
     display.textContent = clearLast;
     operand1 = clearLast;
     operand2 = "";
     operator = "";
-    displayValue = display.textContent;
-    console.log(operand1, operand2);
-    console.log(clearLast);
-    console.log(displayValue);
-  });
+  };
 
-  clearAllDisplay.addEventListener("click", () => {
+  clearLastDisplay.addEventListener("click", clearLast);
+
+  const clearAll = () => {
     operand1 = "";
     operator = "";
     operand2 = "";
     display.textContent = 0;
-    displayValue = display.textContent;
-    console.log(displayValue);
-  });
-}
+  };
+
+  clearAllDisplay.addEventListener("click", clearAll);
+};
 calculator();
