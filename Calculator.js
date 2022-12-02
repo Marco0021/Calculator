@@ -55,7 +55,7 @@ const calculator = () => {
   equals.addEventListener("click", calcResult);
 
   const getOperand = (e) => {
-    if (operator == "") {
+    if (operator == "" && display.textContent.includes("=")) {
       operand1 += e.target.innerText;
       display.textContent = operand1;
       console.log(`op1: ${operand1}`);
