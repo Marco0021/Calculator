@@ -4,13 +4,13 @@ let operators = document.querySelectorAll(".operator");
 let clearLastDisplay = document.querySelector("#keydelete");
 let clearAllDisplay = document.querySelector("#cancel");
 let equals = document.querySelector("#equals");
+let btnPoint = document.querySelector("#point");
 
 const calculator = () => {
   let operand1 = "";
   let operand2 = "";
   let operator = "";
   let lastResult;
-  let newResult;
 
   const add = (operand1, operand2) => {
     result = +operand1 + +operand2;
@@ -21,6 +21,9 @@ const calculator = () => {
     return result;
   };
   const divider = (operand1, operand2) => {
+    if (operand2 == 0) {
+      return "Err:impossible to divide by 0";
+    }
     result = +operand1 / +operand2;
     return result;
   };
@@ -55,6 +58,9 @@ const calculator = () => {
   equals.addEventListener("click", calcResult);
 
   const getOperand = (e) => {
+    if (operand1 && operand2 && lastResult !== true) {
+      clearAll();
+    }
     if (operator == "") {
       operand1 += e.target.innerText;
       display.textContent = operand1;
@@ -105,6 +111,7 @@ const calculator = () => {
     operand1 = "";
     operator = "";
     operand2 = "";
+    lastResult = undefined;
     display.textContent = 0;
   };
 
