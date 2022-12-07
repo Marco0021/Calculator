@@ -36,29 +36,31 @@ const calculator = () => {
   };
 
   const calcResult = () => {
-    switch (operator) {
-      case "+":
-        lastResult = add(operand1, operand2);
-        break;
-      case "-":
-        lastResult = subtract(operand1, operand2);
-        break;
-      case "*":
-        lastResult = multiply(operand1, operand2);
-        break;
-      case "/":
-        lastResult = divider(operand1, operand2);
-        break;
-      case "%":
-        lastResult = percentage(operand1);
+    if (operand2) {
+      switch (operator) {
+        case "+":
+          lastResult = add(operand1, operand2);
+          break;
+        case "-":
+          lastResult = subtract(operand1, operand2);
+          break;
+        case "*":
+          lastResult = multiply(operand1, operand2);
+          break;
+        case "/":
+          lastResult = divider(operand1, operand2);
+          break;
+        case "%":
+          lastResult = percentage(operand1);
+      }
+      display.textContent = lastResult;
     }
-    display.textContent = lastResult;
   };
 
   equals.addEventListener("click", calcResult);
 
   const getOperand = (e) => {
-    if (operand1 && operand2 && lastResult !== true) {
+    if (lastResult) {
       clearAll();
     }
     if (operator == "") {
@@ -86,8 +88,10 @@ const calculator = () => {
     if (lastResult !== undefined) {
       operand1 = lastResult;
       operand2 = "";
+      lastResult = "";
     }
     display.textContent = operand1 + operator;
+    console.log(display.textContent);
   };
 
   operators.forEach((operatorBtn) => {
@@ -100,9 +104,10 @@ const calculator = () => {
     let display = document.querySelector("#display");
     let clearLast = display.textContent.toString().slice(0, -1);
     display.textContent = clearLast;
-    operand1 = clearLast;
+    operand1 = display.textContent;
     operand2 = "";
     operator = "";
+    console.log(operand1);
   };
 
   clearLastDisplay.addEventListener("click", clearLast);

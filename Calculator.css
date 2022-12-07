@@ -67,16 +67,3 @@ button {
     background-color: rgba(177, 143, 143, 0.816) !important;
     transition: 0.2s;
 } 
-
-
-/* 
-const insertPoint = () => {
-    if (num == false) {
-      if (operand1.includes(".") != true) {
-        operand1 += ".";
-        display.textContent = operand1;
-      }
-    }
-  };
-
-  point.addEventListener("click", insertPoint); */
