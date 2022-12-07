@@ -12,23 +12,40 @@ const calculator = () => {
   let operator = "";
   let lastResult;
 
+  const decimal = () => {
+    if (lastResult == undefined) {
+      if (operand2 && operator) {
+        if (operand2.includes(".") != true) {
+          operand2 += ".";
+          display.textContent = operand1 + operator + operand2;
+        }
+      }
+      if (operand1.includes(".") != true) {
+        operand1 += ".";
+        display.textContent = operand1 + operator + operand2;
+      }
+    }
+  };
+
+  btnPoint.addEventListener("click", decimal);
+
   const add = (operand1, operand2) => {
-    result = +operand1 + +operand2;
+    result = parseFloat(+operand1) + parseFloat(+operand2);
     return result;
   };
   const subtract = (operand1, operand2) => {
-    result = operand1 - operand2;
+    result = parseFloat(operand1) - parseFloat(operand2);
     return result;
   };
   const divider = (operand1, operand2) => {
     if (operand2 == 0) {
       return "Err:impossible to divide by 0";
     }
-    result = +operand1 / +operand2;
+    result = parseFloat(+operand1) / parseFloat(+operand2);
     return result;
   };
   const multiply = (operand1, operand2) => {
-    result = +operand1 * +operand2;
+    result = parseFloat(+operand1) * parseFloat(+operand2);
     return result;
   };
   const percentage = (operand1) => {
@@ -53,7 +70,8 @@ const calculator = () => {
         case "%":
           lastResult = percentage(operand1);
       }
-      display.textContent = lastResult;
+      display.textContent = parseFloat(lastResult);
+      console.log(lastResult);
     }
   };
 
@@ -85,7 +103,7 @@ const calculator = () => {
   const getOperator = (e) => {
     calcResult();
     operator = e.target.innerText;
-    if (lastResult !== undefined) {
+    if (lastResult !== undefined && lastResult !== "") {
       operand1 = lastResult;
       operand2 = "";
       lastResult = "";
@@ -101,23 +119,37 @@ const calculator = () => {
   });
 
   const clearLast = () => {
-    let display = document.querySelector("#display");
-    let clearLast = display.textContent.toString().slice(0, -1);
-    display.textContent = clearLast;
-    operand1 = display.textContent;
-    operand2 = "";
-    operator = "";
-    console.log(operand1);
+    if (lastResult) {
+      clearAll();
+      display.textContent = 0;
+      console.log(`dv : ${display.textContent}`);
+    }
+    if (
+      (operand2 !== "" && lastResult == undefined) ||
+      (operand2 !== "" && lastResult !== "")
+    ) {
+      operand2 = operand2.toString().slice(0, -1);
+      display.textContent = operand1 + operator + operand2;
+    } else {
+      let display = document.querySelector("#display");
+      let clearLast = display.textContent.toString().slice(0, -1);
+      display.textContent = clearLast;
+      operand1 = display.textContent;
+      operand2 = "";
+      operator = "";
+      console.log(operand1);
+      console.log(`dv : ${display.textContent}`);
+    }
   };
 
   clearLastDisplay.addEventListener("click", clearLast);
 
   const clearAll = () => {
+    display.textContent = 0;
     operand1 = "";
     operator = "";
     operand2 = "";
     lastResult = undefined;
-    display.textContent = 0;
   };
 
   clearAllDisplay.addEventListener("click", clearAll);
