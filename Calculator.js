@@ -13,7 +13,7 @@ const calculator = () => {
   let lastResult;
 
   const decimal = () => {
-    if (lastResult == undefined) {
+    if (lastResult == undefined || lastResult == "") {
       if (operand2 && operator) {
         if (operand2.includes(".") != true) {
           operand2 += ".";
@@ -39,7 +39,8 @@ const calculator = () => {
   };
   const divider = (operand1, operand2) => {
     if (operand2 == 0) {
-      return "Err:impossible to divide by 0";
+      display.textContent = "Err:impossible to divide";
+      return "Err:impossible to divide";
     }
     result = parseFloat(+operand1) / parseFloat(+operand2);
     return result;
@@ -69,9 +70,13 @@ const calculator = () => {
           break;
         case "%":
           lastResult = percentage(operand1);
+          break;
       }
-      display.textContent = parseFloat(lastResult);
-      console.log(lastResult);
+      if (lastResult) {
+        if (!Number.isInteger(lastResult)) {
+          display.textContent = lastResult.toFixed(2);
+        } else display.textContent = lastResult;
+      }
     }
   };
 
@@ -104,9 +109,17 @@ const calculator = () => {
     calcResult();
     operator = e.target.innerText;
     if (lastResult !== undefined && lastResult !== "") {
-      operand1 = lastResult;
-      operand2 = "";
-      lastResult = "";
+      if (lastResult) {
+        if (!Number.isInteger(lastResult)) {
+          operand1 = lastResult.toFixed(2);
+          operand2 = "";
+          lastResult = "";
+        } else {
+          operand1 = lastResult;
+          operand2 = "";
+          lastResult = "";
+        }
+      }
     }
     display.textContent = operand1 + operator;
     console.log(display.textContent);
@@ -121,7 +134,6 @@ const calculator = () => {
   const clearLast = () => {
     if (lastResult) {
       clearAll();
-      display.textContent = 0;
       console.log(`dv : ${display.textContent}`);
     }
     if (
